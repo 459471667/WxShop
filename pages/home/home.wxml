@@ -1,0 +1,14 @@
+<!--pages/home/home.wxml-->
+<!-- 导航条 -->
+<view class='navbar'>
+  <text wx:for="{{navbars}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item.navbarName}}</text>
+</view>
+<!-- banner -->
+<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+  <block wx:for="{{banners}}"  wx:key="unique" >
+    <swiper-item item-id="{{index}}">
+      <image src="{{item.imgUrl}}" mode="widthFix" data-goodsid="{{item.id}}"  />
+    </swiper-item>
+  </block>
+</swiper>
+
