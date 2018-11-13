@@ -27,8 +27,8 @@
       <text class="name">新品特卖</text>
       <view class="line_flag"></view>
       <block wx:for-items="{{brands}}" wx:key="id">
-        <navigator url="/pages/detail/detail">
-        <image class="head-img" src="{{item.imgUrl}}" mode="widthFix"></image>
+        <navigator url="/pages/brand/brand?activityId={{item.id}}">
+          <image class="head-img" src="{{item.imgUrl}}" mode="widthFix"></image>
         </navigator>
         <text class="brand-name">{{item.name}}</text> 
         <view class='pas'>

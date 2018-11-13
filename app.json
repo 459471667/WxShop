@@ -6,7 +6,9 @@
     "pages/classify/classify",
     "pages/mine/mine",
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/brand/brand",
+    "pages/classifyGoods/classifyGoods"
   ],
   "window": {
     "backgroundTextStyle": "light",

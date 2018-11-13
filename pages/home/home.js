@@ -147,6 +147,25 @@ Page({
     })
   },
 
+  catchTapCategory: function (e) {
+    var that = this;
+    var goodsId = e.currentTarget.dataset.goodsid;
+    //新增商品用户点击数量
+    that.goodsClickShow(goodsId);
+    //跳转商品详情
+    wx.navigateTo({ url: '../detail/detail?goodsId=' + goodsId })
+  },
+  goodsClickShow(goodsId) {
+    var that = this;
+    ajax.request({
+      method: 'GET',
+      url: 'goods/addGoodsClickRate?key=' + utils.key + '&goodsId=' + goodsId,
+      success: data => {
+        console.log("用户点击统计返回结果：" + data.message)
+      }
+    })
+  },
+
   /**
    * 页面上拉触底事件的处理函数
    */
