@@ -164,20 +164,68 @@ Page({
    */
   addCar: function (e) {
     var that = this;
+    var goods = this.data.goods;
+    console.log(goods)
+    goods.isSelect = false;
     var count = this.data.goods.count;
-    ajax.request({
-      method: 'GET',
-      url: 'carts/addShopCarts?key=' + utils.key + '&goodsId=' + goodsId + '&num=' + count,
-      success: data => {
-        console.log("加入购物车返回结果：" + data.message)
-        that.closeDialog();
-        wx.showToast({
-          title: '加入购物车成功',
-          icon: 'success',
-          duration: 2000
-        });
+    var title = this.data.goods.title;
+    if (title.length > 13) {
+      goods.title = title.substring(0, 13) + '...';
+    }
+    // 获取购物车的缓存数组（没有数据，则赋予一个空数组）  
+    var arr = wx.getStorageSync('cart') || [];
+    if(arr.length > 0){
+      for( var j in arr){
+        if (arr[j].goodsId == goodsId){
+          arr[j].count = arr[j].count + count;
+          try {
+            wx.setStorageSync('cart', arr)
+          } catch (e) {
+            console.log(e)
+          }
+          //关闭窗口
+          wx.showToast({
+            title: '加入购物车成功！',
+            icon: 'success',
+            duration: 2000
+          });
+          this.closeDialog();
+          // 返回（在if内使用return，跳出循环节约运算，节约性能） 
+          return;
+        }
       }
-    })
+      arr.push(goods);
+    }else{
+      arr.push(goods)
+    }
+
+    try {
+      wx.setStorageSync('cart', arr)
+      // 返回（在if内使用return，跳出循环节约运算，节约性能） 
+      //关闭窗口
+      wx.showToast({
+        title: '加入购物车成功！',
+        icon: 'success',
+        duration: 2000
+      });
+      this.closeDialog();
+      return;
+    } catch (e) {
+      console.log(e)
+    }  
+    // ajax.request({
+    //   method: 'GET',
+    //   url: 'carts/addShopCarts?key=' + utils.key + '&goodsId=' + goodsId + '&num=' + count,
+    //   success: data => {
+    //     console.log("加入购物车返回结果：" + data.message)
+    //     that.closeDialog();
+    //     wx.showToast({
+    //       title: '加入购物车成功',
+    //       icon: 'success',
+    //       duration: 2000
+    //     });
+    //   }
+    // })
   },
 
   /**
