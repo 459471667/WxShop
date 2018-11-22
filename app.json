@@ -9,7 +9,9 @@
     "pages/logs/logs",
     "pages/brand/brand",
     "pages/classifyGoods/classifyGoods",
-    "pages/goods/goods"
+    "pages/goods/goods",
+    "pages/addressList/addressList",
+    "pages/address/address"
   ],
   "window": {
     "backgroundTextStyle": "light",
